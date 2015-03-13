@@ -1,0 +1,19 @@
+Si vas a ejecutar todo en tu computadora, tenés q agregar la siguiente
+regla para configurar el proxy transparente (o sea, para no tener que
+configurar el navegador para que use el proxy):
+
+$ sudo iptables -t nat -A OUTPUT -p tcp --dport 80 -j REDIRECT --to-port 8093
+
+El puerto 8000 es de ejemplo y deberías colocar el que use tu proxy.
+
+ Para borrar esa entrada:
+
+sudo iptables -D OUTPUT 1 -t nat
+
+
+Si el proxy se ejecutara en otra computadora, la regla sería:
+
+$ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT
+--to-port 8000
+
+
